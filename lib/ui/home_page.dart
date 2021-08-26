@@ -1,0 +1,73 @@
+part of 'pages.dart';
+
+class HomePage extends StatefulWidget {
+  static const routeName = '/home_page';
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  int bottomNavIndex = 0;
+
+  List<BottomNavigationBarItem> _bottomNavBarItems = [
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
+      label: 'Home',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS ? CupertinoIcons.heart : Icons.favorite),
+      label: 'Favorites',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
+      label: 'Settings',
+    ),
+  ];
+
+  List<Widget> _listWidget = [
+    RestaurantListPage(),
+    FavoritePage(),
+    SettingPage(),
+  ];
+
+  Widget _buildAndroid(BuildContext context) {
+    return Scaffold(
+      body: _listWidget[bottomNavIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomNavIndex,
+        items: _bottomNavBarItems,
+        onTap: (selected) {
+          setState(() {
+            bottomNavIndex = selected;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildIos(BuildContext context) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        items: _bottomNavBarItems,
+      ),
+      tabBuilder: (context, index) {
+        return _listWidget[index];
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PlatformWidget(
+      androidBuilder: _buildAndroid,
+      iosBuilder: _buildIos,
+    );
+  }
+}

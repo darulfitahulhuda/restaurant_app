@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:restaurant_app/common/styles.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/common/enum.dart';
+import 'package:restaurant_app/provider/provider.dart';
+import 'package:restaurant_app/widget/widgets.dart';
+import 'package:restaurant_app/data/model/models.dart';
+import 'package:restaurant_app/data/api/api_services.dart';
+import 'package:restaurant_app/common/navigation.dart';
+
+part 'body_detail.dart';
+part 'food_detail.dart';
+part 'name_detail.dart';
+part 'drink_detail.dart';
+part 'header_detail.dart';
+part 'favorite_button.dart';
+part 'customer_reviews.dart';
+part 'detail_restorant.dart';
+part 'description_detail.dart';
